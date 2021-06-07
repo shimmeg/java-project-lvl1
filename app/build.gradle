@@ -19,3 +19,7 @@ dependencies {
 application {
     mainClass = 'io.hexlet.App'
 }
+
+compileJava {
+    options.release = 15
+}

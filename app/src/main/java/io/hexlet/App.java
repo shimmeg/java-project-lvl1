@@ -5,7 +5,7 @@ package io.hexlet;
 
 public class App {
 	public String getGreeting() {
-		return "Hello World!";
+		return "Welcome to the Mind Games!";
 	}
 
 	public static void main(String[] args) {
