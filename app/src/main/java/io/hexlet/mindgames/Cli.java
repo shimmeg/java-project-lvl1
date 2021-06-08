@@ -2,7 +2,7 @@ package io.hexlet.mindgames;
 
 import java.util.Scanner;
 
-public class Cli {
+public final class Cli {
 
 	private final Scanner scanner = new Scanner(System.in);
 
