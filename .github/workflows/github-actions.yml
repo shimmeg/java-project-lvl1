@@ -4,4 +4,4 @@ jobs:
   Execute-Linter-After-Commit:
     runs-on: ubuntu-latest
     steps:
-      - run: make build
+      - run: ../../make build
