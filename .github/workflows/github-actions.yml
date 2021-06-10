@@ -4,4 +4,10 @@ jobs:
   Execute-Linter-After-Commit:
     runs-on: ubuntu-latest
     steps:
-      - run: ../../make build
+      - uses: actions/checkout@v2
+      - name: Set up JDK 15
+        uses: actions/checkout@v2
+        with:
+          java-version: '15'
+          distribution: 'adopt'
+      - run: make build
