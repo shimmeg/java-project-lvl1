@@ -1,0 +1,7 @@
+name: Linter after commit
+on: [push]
+jobs:
+  Execute-Linter-After-Commit:
+    runs-on: ubuntu-latest
+    steps:
+      - run: make build
