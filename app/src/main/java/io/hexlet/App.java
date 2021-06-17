@@ -1,17 +1,50 @@
 package io.hexlet;
 
-import io.hexlet.mindgames.Cli;
+import java.util.ArrayList;
+import java.util.List;
 
-public class App {
+import io.hexlet.mindgames.menu.AppMenu;
+import io.hexlet.mindgames.CliGame;
+import io.hexlet.mindgames.even.EvenGame;
+import io.hexlet.mindgames.greet.GreetGame;
+import io.hexlet.mindgames.io.StandardInputOutputStrategy;
+import io.hexlet.mindgames.menu.GameMenuItem;
 
-    private final Cli cli = new Cli();
+public final class App {
+
+    private final StandardInputOutputStrategy inputOutput;
+    private final List<CliGame> gamesList;
+
+    public App(StandardInputOutputStrategy standardInput, List<CliGame> games) {
+        this.inputOutput = standardInput;
+        this.gamesList = games;
+    }
 
     private void start() {
-        String user = cli.requestName();
-        cli.greetUser(user);
+        prepareGames();
+        AppMenu appMenu = createMenu();
+        appMenu.show();
+    }
+
+    private AppMenu createMenu() {
+        AppMenu appMenu = new AppMenu(inputOutput);
+        for (CliGame cliGame : gamesList) {
+            appMenu.addMenuItem(new GameMenuItem(cliGame));
+        }
+        return appMenu;
+    }
+
+    private void prepareGames() {
+        gamesList.forEach(cliGame -> cliGame.prepareGame(inputOutput));
     }
 
     public static void main(String[] args) {
-        new App().start();
+        StandardInputOutputStrategy standardInput = new StandardInputOutputStrategy(System.in, System.out);
+
+        final List<CliGame> gamesList = new ArrayList<>();
+        gamesList.add(new GreetGame());
+        gamesList.add(new EvenGame());
+
+        new App(standardInput, gamesList).start();
     }
 }
