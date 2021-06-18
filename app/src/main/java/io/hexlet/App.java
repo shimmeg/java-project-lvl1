@@ -8,6 +8,7 @@ import io.hexlet.mindgames.CliGame;
 import io.hexlet.mindgames.even.EvenGame;
 import io.hexlet.mindgames.greet.GreetGame;
 import io.hexlet.mindgames.io.StandardInputOutputStrategy;
+import io.hexlet.mindgames.menu.ExitMenuItem;
 import io.hexlet.mindgames.menu.GameMenuItem;
 
 public final class App {
@@ -28,6 +29,7 @@ public final class App {
 
     private AppMenu createMenu() {
         AppMenu appMenu = new AppMenu(inputOutput);
+        appMenu.addMenuItem(new ExitMenuItem());
         for (CliGame cliGame : gamesList) {
             appMenu.addMenuItem(new GameMenuItem(cliGame));
         }
