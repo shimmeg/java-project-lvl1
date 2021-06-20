@@ -5,3 +5,6 @@
 
 Asciinema with example:
 https://asciinema.org/a/SAsiF29ZOVHCqBzrRFyqCIoPB
+
+Asciinema for Calc:
+https://asciinema.org/a/9bhjs5PANPWKYmKf1gADX5kI4
