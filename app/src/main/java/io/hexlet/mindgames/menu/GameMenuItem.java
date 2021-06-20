@@ -1,17 +1,15 @@
 package io.hexlet.mindgames.menu;
 
-import java.util.function.Consumer;
-
 import io.hexlet.mindgames.CliGame;
 
-public final class GameMenuItem implements MenuItem<String> {
+public final class GameMenuItem implements MenuItem {
 
     private final CliGame game;
-    private final Consumer<String> startGame;
+    private final Runnable startGame;
 
     public GameMenuItem(CliGame cliGame) {
         this.game = cliGame;
-        this.startGame = cliGame::startGame;
+        this.startGame = cliGame::executeGame;
     }
 
     @Override
@@ -20,7 +18,7 @@ public final class GameMenuItem implements MenuItem<String> {
     }
 
     @Override
-    public Consumer<String> getHandler() {
+    public Runnable getHandler() {
         return startGame;
     }
 }

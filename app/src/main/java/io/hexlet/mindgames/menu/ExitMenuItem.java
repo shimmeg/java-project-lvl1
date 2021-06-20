@@ -1,8 +1,6 @@
 package io.hexlet.mindgames.menu;
 
-import java.util.function.Consumer;
-
-public class ExitMenuItem implements MenuItem<String> {
+public final class ExitMenuItem implements MenuItem {
 
     public static final String EXIT = "Exit";
 
@@ -12,7 +10,7 @@ public class ExitMenuItem implements MenuItem<String> {
     }
 
     @Override
-    public Consumer<String> getHandler() {
-        return unused -> { };
+    public Runnable getHandler() {
+        return () -> { };
     }
 }

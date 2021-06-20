@@ -1,10 +1,8 @@
 package io.hexlet.mindgames.menu;
 
-import java.util.function.Consumer;
-
-public interface MenuItem<T> {
+public interface MenuItem {
 
     String getText();
 
-    Consumer<T> getHandler();
+    Runnable getHandler();
 }

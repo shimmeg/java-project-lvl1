@@ -5,8 +5,8 @@ import java.util.List;
 
 import io.hexlet.mindgames.menu.AppMenu;
 import io.hexlet.mindgames.CliGame;
-import io.hexlet.mindgames.even.EvenGame;
-import io.hexlet.mindgames.greet.GreetGame;
+import io.hexlet.mindgames.games.EvenGame;
+import io.hexlet.mindgames.games.GreetGame;
 import io.hexlet.mindgames.io.StandardInputOutputStrategy;
 import io.hexlet.mindgames.menu.ExitMenuItem;
 import io.hexlet.mindgames.menu.GameMenuItem;

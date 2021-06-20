@@ -8,5 +8,5 @@ public interface CliGame {
 
     void prepareGame(InputOutputStrategy input);
 
-    void startGame(String userName);
+    void executeGame();
 }

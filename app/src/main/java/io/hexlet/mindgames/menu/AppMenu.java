@@ -9,14 +9,14 @@ public final class AppMenu {
     private static final String HEADER_TEXT = "Please enter the game number and press Enter.";
 
     private final InputOutputStrategy inputOutput;
-    private final List<MenuItem<String>> menuItems;
+    private final List<MenuItem> menuItems;
 
     public AppMenu(InputOutputStrategy inputOutputStrategy) {
         this.inputOutput = inputOutputStrategy;
         this.menuItems = new ArrayList<>();
     }
 
-    public void addMenuItem(MenuItem<String> item) {
+    public void addMenuItem(MenuItem item) {
         menuItems.add(item);
     }
 
@@ -28,17 +28,7 @@ public final class AppMenu {
 
     private void handleInput() {
         int index = requestMenuIndex();
-
-        String userName = requestUserName();
-        menuItems.get(index).getHandler().accept(userName);
-    }
-
-    private String requestUserName() {
-        inputOutput.println("Welcome to the Brain Games!");
-        inputOutput.print("May I have your name? ");
-        String userName = inputOutput.readNext();
-        inputOutput.println("Hello, " + userName + '!');
-        return userName;
+        menuItems.get(index).getHandler().run();
     }
 
     private int requestMenuIndex() {
