@@ -79,7 +79,8 @@ public abstract class CliGameEngine implements CliGame {
     }
 
     private void handleAnswer(String answer) {
-        if (answerIsCorrect(answer)) {
+        String trimmedAnswer = answer.trim();
+        if (answerIsCorrect(trimmedAnswer)) {
             numberOfCorrectAnswers++;
             printAnswerIsCorrect();
 
@@ -87,7 +88,7 @@ public abstract class CliGameEngine implements CliGame {
                 printCongrats();
             }
         } else {
-            printAnswerIsIncorrect(answer, getCurrentCorrectAnswer());
+            printAnswerIsIncorrect(trimmedAnswer, getCurrentCorrectAnswer());
             numberOfIncorrectAnswers++;
         }
     }

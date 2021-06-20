@@ -3,6 +3,7 @@ package io.hexlet;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.hexlet.mindgames.games.CalcGame;
 import io.hexlet.mindgames.menu.AppMenu;
 import io.hexlet.mindgames.CliGame;
 import io.hexlet.mindgames.games.EvenGame;
@@ -46,6 +47,7 @@ public final class App {
         final List<CliGame> gamesList = new ArrayList<>();
         gamesList.add(new GreetGame());
         gamesList.add(new EvenGame());
+        gamesList.add(new CalcGame());
 
         new App(standardInput, gamesList).start();
     }

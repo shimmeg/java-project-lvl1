@@ -1,6 +1,7 @@
 package io.hexlet.mindgames.games;
 
 import java.util.Random;
+import java.util.function.IntBinaryOperator;
 
 public final class CalcGame extends CliGameEngine {
 
@@ -10,6 +11,7 @@ public final class CalcGame extends CliGameEngine {
     private final Operand[] operands = {Operand.PLUS, Operand.MINUS, Operand.MULT};
 
     private final Random random = new Random();
+    private long currentCorrectAnswer;
 
     @Override
     public String getName() {
@@ -23,11 +25,18 @@ public final class CalcGame extends CliGameEngine {
 
     @Override
     protected String getCurrentCorrectAnswer() {
-        return null;
+        return String.valueOf(currentCorrectAnswer);
     }
 
+    @Override
     protected String generateNextQuestion() {
-        return null;
+        int firstNumber = generateRandomInt(DEFAULT_UPPER_RANGE);
+        int secondNumber = generateRandomInt(DEFAULT_UPPER_RANGE);
+        int operatorIndex = generateRandomInt(DEFAULT_UPPER_RANGE) % operands.length;
+        Operand operand = operands[operatorIndex];
+
+        currentCorrectAnswer = operand.binaryOperator.applyAsInt(firstNumber, secondNumber);
+        return String.format("%d %s %d ", firstNumber, operand.stringValue, secondNumber);
     }
 
     private int generateRandomInt(int upperRange) {
@@ -35,6 +44,16 @@ public final class CalcGame extends CliGameEngine {
     }
 
     private enum Operand {
-        PLUS, MINUS, MULT
+        PLUS("+", Integer::sum),
+        MINUS("-", (x, y) -> x - y),
+        MULT("*", (x, y) -> x * y);
+
+        private final String stringValue;
+        private final IntBinaryOperator binaryOperator;
+
+        Operand(String stringOperand, IntBinaryOperator operator) {
+            this.stringValue = stringOperand;
+            this.binaryOperator = operator;
+        }
     }
 }
