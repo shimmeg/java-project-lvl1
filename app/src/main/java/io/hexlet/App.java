@@ -3,7 +3,12 @@ package io.hexlet;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.hexlet.mindgames.games.*;
+import io.hexlet.mindgames.games.CalcGame;
+import io.hexlet.mindgames.games.EvenGame;
+import io.hexlet.mindgames.games.GCDGame;
+import io.hexlet.mindgames.games.GreetGame;
+import io.hexlet.mindgames.games.PrimeGame;
+import io.hexlet.mindgames.games.ProgressionGame;
 import io.hexlet.mindgames.menu.AppMenu;
 import io.hexlet.mindgames.CliGame;
 import io.hexlet.mindgames.io.StandardInputOutputStrategy;
@@ -48,6 +53,7 @@ public final class App {
         gamesList.add(new CalcGame());
         gamesList.add(new GCDGame());
         gamesList.add(new ProgressionGame());
+        gamesList.add(new PrimeGame());
 
         new App(standardInput, gamesList).start();
     }
