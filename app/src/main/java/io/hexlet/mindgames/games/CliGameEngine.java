@@ -50,11 +50,18 @@ public abstract class CliGameEngine implements CliGame {
         }
     }
 
-    private boolean gameIsFinished() {
-        return wonTheGame() || looseTheGame();
+    private void printDescription() {
+        String description = getDescription();
+        if (description != null && !description.isEmpty()) {
+            println(description);
+        }
     }
 
-    private boolean looseTheGame() {
+    private boolean gameIsFinished() {
+        return wonTheGame() || lostTheGame();
+    }
+
+    private boolean lostTheGame() {
         return numberOfIncorrectAnswers > 0;
     }
 
@@ -113,5 +120,5 @@ public abstract class CliGameEngine implements CliGame {
 
     protected abstract String generateNextQuestion();
 
-    protected abstract void printDescription();
+    protected abstract String getDescription();
 }

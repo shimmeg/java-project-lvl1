@@ -24,7 +24,7 @@ public final class GreetGame extends CliGameEngine {
     }
 
     @Override
-    protected void printDescription() {
-        //empty description
+    protected String getDescription() {
+        return "";
     }
 }

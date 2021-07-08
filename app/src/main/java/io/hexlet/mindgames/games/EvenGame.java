@@ -20,8 +20,8 @@ public final class EvenGame extends CliGameEngine {
     }
 
     @Override
-    protected void printDescription() {
-        println(GAME_DESCRIPTION);
+    protected String getDescription() {
+        return GAME_DESCRIPTION;
     }
 
     @Override

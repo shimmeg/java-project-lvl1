@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.hexlet.mindgames.games.CalcGame;
+import io.hexlet.mindgames.games.GCDGame;
 import io.hexlet.mindgames.menu.AppMenu;
 import io.hexlet.mindgames.CliGame;
 import io.hexlet.mindgames.games.EvenGame;
@@ -48,6 +49,7 @@ public final class App {
         gamesList.add(new GreetGame());
         gamesList.add(new EvenGame());
         gamesList.add(new CalcGame());
+        gamesList.add(new GCDGame());
 
         new App(standardInput, gamesList).start();
     }
