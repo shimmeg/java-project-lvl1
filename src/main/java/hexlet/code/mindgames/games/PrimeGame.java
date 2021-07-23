@@ -1,54 +1,45 @@
 package hexlet.code.mindgames.games;
 
-import hexlet.code.mindgames.CliGame;
-import hexlet.code.mindgames.io.InputOutputStrategy;
+import hexlet.code.mindgames.GameEngine;
+import hexlet.code.mindgames.Utils;
 
-public final class PrimeGame implements CliGame {
+public final class PrimeGame {
 
-    private static final String PRIME_GAME = "Prime";
     private static final String GAME_DESCRIPTION = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
-    private static final int FIRST_PRIME_NUMBER = 2;
-    private static final int SECOND_PRIME_NUMBER = 3;
+    private static final int DEFAULT_UPPER_RANGE = 150;
+    private static final String YES = "yes";
+    private static final String NO = "no";
 
-    private final SimpleRandomIntGame game;
-
-    public PrimeGame() {
-        this.game = new SimpleRandomIntGame(PRIME_GAME, GAME_DESCRIPTION, this::isPrimeNumber);
+    public static void execute() {
+        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks(), GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN);
     }
 
-    private boolean isPrimeNumber(int n) {
-        if (n < FIRST_PRIME_NUMBER) {
-            return false;
+    private static String[][] generateTasks() {
+        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN][];
+        for (int i = 0; i < tasks.length; i++) {
+            tasks[i] = new String[2];
+            generateNextQuestion(tasks[i]);
         }
-        if (n == FIRST_PRIME_NUMBER || n == SECOND_PRIME_NUMBER) {
-            return true;
-        }
-        if (n % FIRST_PRIME_NUMBER == 0 || n % SECOND_PRIME_NUMBER == 0) {
+        return tasks;
+    }
+
+    private static void generateNextQuestion(String[] task) {
+        int currentNumber = Utils.generateRandomInt(DEFAULT_UPPER_RANGE);
+        task[0] = String.valueOf(currentNumber);
+        task[1] = isPrime(currentNumber) ? YES : NO;
+    }
+
+    private static boolean isPrime(int number) {
+        if (number < 2) {
             return false;
         }
 
-        long sqrtN = (long) Math.sqrt(n) + 1;
-        long period = FIRST_PRIME_NUMBER * SECOND_PRIME_NUMBER;
-        for (long i = period; i <= sqrtN; i += period) {
-            if (n % (i - 1) == 0 || n % (i + 1) == 0) {
+        for (int i = 2; i <= Math.sqrt(number); i += 1) {
+            if (number % i == 0) {
                 return false;
             }
         }
+
         return true;
-    }
-
-    @Override
-    public String getName() {
-        return game.getName();
-    }
-
-    @Override
-    public void prepareGame(InputOutputStrategy input) {
-        game.prepareGame(input);
-    }
-
-    @Override
-    public void executeGame() {
-        game.executeGame();
     }
 }

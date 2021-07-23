@@ -1,53 +1,64 @@
 package hexlet.code.mindgames.menu;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import hexlet.code.mindgames.io.InputOutputStrategy;
+import hexlet.code.mindgames.Cli;
+import hexlet.code.mindgames.games.CalcGame;
+import hexlet.code.mindgames.games.EvenGame;
+import hexlet.code.mindgames.games.GCDGame;
+import hexlet.code.mindgames.games.PrimeGame;
+import hexlet.code.mindgames.games.ProgressionGame;
 
 public final class AppMenu {
+
     private static final String HEADER_TEXT = "Please enter the game number and press Enter.";
+    private static final String MENU_ITEMS = "1 - Greet\n"
+            + "2 - Even\n"
+            + "3 - Calc\n"
+            + "4 - GCD\n"
+            + "5 - Progression\n"
+            + "6 - Prime\n"
+            + "0 - Exit\n"
+            + "Your choice: ";
 
-    private final InputOutputStrategy inputOutput;
-    private final List<MenuItem> menuItems;
-
-    public AppMenu(InputOutputStrategy inputOutputStrategy) {
-        this.inputOutput = inputOutputStrategy;
-        this.menuItems = new ArrayList<>();
-    }
-
-    public void addMenuItem(MenuItem item) {
-        menuItems.add(item);
-    }
-
-    public void show() {
+    public static void show() {
         showHeader();
         showMenuItems();
         handleInput();
     }
 
-    private void handleInput() {
-        int index = requestMenuIndex();
-        menuItems.get(index).getHandler().run();
-    }
-
-    private int requestMenuIndex() {
-        int index = inputOutput.readNextInt();
-        while (menuItems.size() <= index) {
-            inputOutput.print("You entered the incorrect menu item number, please try again.");
-            index = inputOutput.readNextInt();
+    private static void handleInput() {
+        String gameIndex = Cli.scanInput();
+        switch (gameIndex) {
+            case "1":
+                Cli.greetUser();
+                break;
+            case "2":
+                EvenGame.execute();
+                break;
+            case "3":
+                CalcGame.execute();
+                break;
+            case "4":
+                GCDGame.execute();
+                break;
+            case "5":
+                ProgressionGame.execute();
+                break;
+            case "6":
+                PrimeGame.execute();
+                break;
+            case "0":
+                Cli.println("Goodbye!");
+                return;
+            default:
+                Cli.println("Invalid number entered. Restart the game.");
         }
-        inputOutput.println("Your choice: " + index + System.lineSeparator());
-        return index;
     }
 
-    private void showMenuItems() {
-        for (int i = 0; i < menuItems.size(); i++) {
-            inputOutput.println(String.format("%d - %s", i, menuItems.get(i).getText()));
-        }
+    private static void showMenuItems() {
+        Cli.println(MENU_ITEMS);
     }
 
-    private void showHeader() {
-        inputOutput.println(HEADER_TEXT);
+    private static void showHeader() {
+        Cli.println(HEADER_TEXT);
     }
 }

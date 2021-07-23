@@ -1,34 +1,35 @@
 package hexlet.code.mindgames.games;
 
-import hexlet.code.mindgames.CliGame;
-import hexlet.code.mindgames.io.InputOutputStrategy;
+import hexlet.code.mindgames.GameEngine;
+import hexlet.code.mindgames.Utils;
 
-public final class EvenGame implements CliGame {
-
-    private static final String EVEN_GAME = "Even";
+public final class EvenGame {
     private static final String GAME_DESCRIPTION = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
-    private final SimpleRandomIntGame game;
+    private static final int DEFAULT_UPPER_RANGE = 150;
+    private static final String YES = "yes";
+    private static final String NO = "no";
 
-    public EvenGame() {
-        this.game = new SimpleRandomIntGame(EVEN_GAME, GAME_DESCRIPTION, this::isEven);
+    public static void execute() {
+        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks(), GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN);
     }
 
-    @Override
-    public String getName() {
-        return EVEN_GAME;
+    private static String[][] generateTasks() {
+        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN][];
+        for (int i = 0; i < tasks.length; i++) {
+            tasks[i] = new String[2];
+            generateNextQuestion(tasks[i]);
+        }
+        return tasks;
     }
 
-    @Override
-    public void prepareGame(InputOutputStrategy input) {
-        game.prepareGame(input);
+    private static void generateNextQuestion(String[] task) {
+        int currentNumber = Utils.generateRandomInt(DEFAULT_UPPER_RANGE);
+        task[0] = String.valueOf(currentNumber);
+        task[1] = isEven(currentNumber) ? YES : NO;
     }
 
-    @Override
-    public void executeGame() {
-        game.executeGame();
-    }
-    private boolean isEven(int currentNumber) {
+    private static boolean isEven(int currentNumber) {
         return currentNumber % 2 == 0;
     }
 }
