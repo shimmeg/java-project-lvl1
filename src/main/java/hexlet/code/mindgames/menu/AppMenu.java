@@ -1,6 +1,7 @@
 package hexlet.code.mindgames.menu;
 
 import hexlet.code.mindgames.Cli;
+import hexlet.code.mindgames.Utils;
 import hexlet.code.mindgames.games.CalcGame;
 import hexlet.code.mindgames.games.EvenGame;
 import hexlet.code.mindgames.games.GCDGame;
@@ -26,7 +27,7 @@ public final class AppMenu {
     }
 
     private static void handleInput() {
-        String gameIndex = Cli.scanInput();
+        String gameIndex = Utils.scanInput();
         switch (gameIndex) {
             case "1":
                 Cli.greetUser();
@@ -47,18 +48,18 @@ public final class AppMenu {
                 PrimeGame.execute();
                 break;
             case "0":
-                Cli.println("Goodbye!");
+                Utils.println("Goodbye!");
                 return;
             default:
-                Cli.println("Invalid number entered. Restart the game.");
+                Utils.println("Invalid number entered. Restart the game.");
         }
     }
 
     private static void showMenuItems() {
-        Cli.println(MENU_ITEMS);
+        Utils.println(MENU_ITEMS);
     }
 
     private static void showHeader() {
-        Cli.println(HEADER_TEXT);
+        Utils.println(HEADER_TEXT);
     }
 }

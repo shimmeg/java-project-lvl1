@@ -9,23 +9,23 @@ public final class GCDGame {
     private static final int DEFAULT_UPPER_RANGE = 150;
 
     public static void execute() {
-        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks(), GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN);
+        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks());
     }
 
     private static String[][] generateTasks() {
-        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN][];
+        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_OF_ROUNDS][];
         for (int i = 0; i < tasks.length; i++) {
-            tasks[i] = new String[2];
-            generateNextQuestion(tasks[i]);
+            tasks[i] = generateNextQuestion();
         }
         return tasks;
     }
 
-    private static void generateNextQuestion(String[] task) {
-        int firstNumber = Utils.generateRandomInt(DEFAULT_UPPER_RANGE);
-        int secondNumber = Utils.generateRandomInt(DEFAULT_UPPER_RANGE);
-        task[0] = firstNumber + " " + secondNumber;
-        task[1] = String.valueOf(gcdByEuclidsAlgorithm(firstNumber, secondNumber));
+    private static String[] generateNextQuestion() {
+        int firstNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
+        int secondNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
+        String question = firstNumber + " " + secondNumber;
+        String answer = String.valueOf(gcdByEuclidsAlgorithm(firstNumber, secondNumber));
+        return new String[]{question, answer};
     }
 
     private static int gcdByEuclidsAlgorithm(int n1, int n2) {

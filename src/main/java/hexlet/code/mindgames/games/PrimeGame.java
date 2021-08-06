@@ -11,22 +11,22 @@ public final class PrimeGame {
     private static final String NO = "no";
 
     public static void execute() {
-        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks(), GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN);
+        GameEngine.executeGame(GAME_DESCRIPTION, generateTasks());
     }
 
     private static String[][] generateTasks() {
-        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_CORRECT_ANSWERS_TO_WIN][];
+        String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_OF_ROUNDS][];
         for (int i = 0; i < tasks.length; i++) {
-            tasks[i] = new String[2];
-            generateNextQuestion(tasks[i]);
+            tasks[i] = generateNextQuestion();
         }
         return tasks;
     }
 
-    private static void generateNextQuestion(String[] task) {
-        int currentNumber = Utils.generateRandomInt(DEFAULT_UPPER_RANGE);
-        task[0] = String.valueOf(currentNumber);
-        task[1] = isPrime(currentNumber) ? YES : NO;
+    private static String[] generateNextQuestion() {
+        int currentNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
+        String question = String.valueOf(currentNumber);
+        String answer = isPrime(currentNumber) ? YES : NO;
+        return new String[]{question, answer};
     }
 
     private static boolean isPrime(int number) {
