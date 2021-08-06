@@ -6,23 +6,23 @@ public final class GameEngine {
             + "Let's try again, %s!";
     private static final String CORRECT_ANSWER_MESSAGE = "Correct!";
     private static final String CONGRATULATIONS = "Congratulations, %s!";
-
-    private static String userName;
+    private static final String USER_NAME_REQUEST = "Welcome to the Brain Games!\nMay I have your name?";
 
     public static void executeGame(String description, String[][] tasks) {
-        userName = requestUserName();
+        String userName = requestUserName(USER_NAME_REQUEST);
+        greetUser(userName);
 
         printDescription(description);
         for (String[] task : tasks) {
             Utils.println("Question: " + task[0]);
             String answer = Utils.scanInput();
-            boolean correctAnswer = handleAnswer(answer, task[1]);
+            boolean correctAnswer = handleAnswer(answer, task[1], userName);
 
             if (!correctAnswer) {
                 return;
             }
         }
-        printCongrats();
+        printCongrats(userName);
     }
 
     private static void printDescription(String description) {
@@ -31,20 +31,22 @@ public final class GameEngine {
         }
     }
 
-    private static String requestUserName() {
-        Utils.println("Welcome to the Brain Games!");
-        Utils.print("May I have your name? ");
+    private static String requestUserName(String request) {
+        Utils.print(request);
         String name = Utils.scanInput();
-        Utils.println("Hello, " + name + '!');
         return name;
     }
 
-    private static boolean handleAnswer(String answer, String correctAnswer) {
+    private static void greetUser(String userName) {
+        Utils.println("Hello, " + userName + '!');
+    }
+
+    private static boolean handleAnswer(String answer, String correctAnswer, String userName) {
         String trimmedAnswer = answer.trim();
         if (answerIsCorrect(trimmedAnswer, correctAnswer)) {
             printAnswerIsCorrect();
         } else {
-            printAnswerIsIncorrect(trimmedAnswer, correctAnswer);
+            printAnswerIsIncorrect(trimmedAnswer, correctAnswer, userName);
             return false;
         }
         return true;
@@ -54,7 +56,7 @@ public final class GameEngine {
         return correctAnswer.compareToIgnoreCase(answer) == 0;
     }
 
-    private static void printAnswerIsIncorrect(String input, String currentCorrectAnswer) {
+    private static void printAnswerIsIncorrect(String input, String currentCorrectAnswer, String userName) {
         Utils.println(String.format(WRONG_ANSWER_MESSAGE, input, currentCorrectAnswer, userName));
     }
 
@@ -62,7 +64,7 @@ public final class GameEngine {
         Utils.println(CORRECT_ANSWER_MESSAGE);
     }
 
-    private static void printCongrats() {
+    private static void printCongrats(String userName) {
         Utils.println(String.format(CONGRATULATIONS, userName));
     }
 }
