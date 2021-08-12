@@ -7,7 +7,7 @@ public final class CalcGame {
 
     private static final String GAME_DESCRIPTION = "What is the result of the expression?";
     private static final int DEFAULT_UPPER_RANGE = 50;
-    private static final String[] OPERANDS = {"+", "-", "*"};
+    private static final String[] OPERATORS = {"+", "-", "*"};
 
     public static void execute() {
         GameEngine.executeGame(GAME_DESCRIPTION, generateTasks());
@@ -24,11 +24,11 @@ public final class CalcGame {
     private static String[] generateNextQuestion() {
         int firstNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
         int secondNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
-        int operatorIndex = Utils.generateRandomInt(0, OPERANDS.length - 1);
-        String operand = OPERANDS[operatorIndex];
+        int operatorIndex = Utils.generateRandomInt(0, OPERATORS.length - 1);
+        String operator = OPERATORS[operatorIndex];
 
-        String question = String.format("%d %s %d ", firstNumber, operand, secondNumber);
-        String answer = String.valueOf(calculate(firstNumber, secondNumber, operand));
+        String question = String.format("%d %s %d ", firstNumber, operator, secondNumber);
+        String answer = String.valueOf(calculate(firstNumber, secondNumber, operator));
         return new String[]{question, answer};
     }
 

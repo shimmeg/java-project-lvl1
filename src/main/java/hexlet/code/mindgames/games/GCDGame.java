@@ -15,12 +15,12 @@ public final class GCDGame {
     private static String[][] generateTasks() {
         String[][] tasks = new String[GameEngine.DEFAULT_NUMBER_OF_ROUNDS][];
         for (int i = 0; i < tasks.length; i++) {
-            tasks[i] = generateNextQuestion();
+            tasks[i] = generateQuestionAndAnswer();
         }
         return tasks;
     }
 
-    private static String[] generateNextQuestion() {
+    private static String[] generateQuestionAndAnswer() {
         int firstNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
         int secondNumber = Utils.generateRandomInt(1, DEFAULT_UPPER_RANGE);
         String question = firstNumber + " " + secondNumber;

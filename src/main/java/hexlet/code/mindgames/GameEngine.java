@@ -15,10 +15,14 @@ public final class GameEngine {
         printDescription(description);
         for (String[] task : tasks) {
             Utils.println("Question: " + task[0]);
-            String answer = Utils.scanInput();
-            boolean correctAnswer = handleAnswer(answer, task[1], userName);
+            String correctAnswer = task[1];
 
-            if (!correctAnswer) {
+            String answer = Utils.scanInput();
+            String trimmedAnswer = answer.trim();
+            if (answerIsCorrect(trimmedAnswer, correctAnswer)) {
+                printAnswerIsCorrect();
+            } else {
+                printAnswerIsIncorrect(trimmedAnswer, correctAnswer, userName);
                 return;
             }
         }
@@ -26,30 +30,16 @@ public final class GameEngine {
     }
 
     private static void printDescription(String description) {
-        if (description != null && !description.isEmpty()) {
-            Utils.println(description);
-        }
+        Utils.println(description);
     }
 
     private static String requestUserName(String request) {
         Utils.print(request);
-        String name = Utils.scanInput();
-        return name;
+        return Utils.scanInput();
     }
 
     private static void greetUser(String userName) {
         Utils.println("Hello, " + userName + '!');
-    }
-
-    private static boolean handleAnswer(String answer, String correctAnswer, String userName) {
-        String trimmedAnswer = answer.trim();
-        if (answerIsCorrect(trimmedAnswer, correctAnswer)) {
-            printAnswerIsCorrect();
-        } else {
-            printAnswerIsIncorrect(trimmedAnswer, correctAnswer, userName);
-            return false;
-        }
-        return true;
     }
 
     private static boolean answerIsCorrect(String answer, String correctAnswer) {
